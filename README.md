@@ -22,6 +22,6 @@ Cars of all types come in and out randomly, the API must :
  - Mark the parking slot as Free when the car leaves it
  - Bill the customer when the car leaves.
 
-What we want :
+### What we want :
  - A Java API ready to use, tested, documented (how to build from sources, how to use the API).
 
