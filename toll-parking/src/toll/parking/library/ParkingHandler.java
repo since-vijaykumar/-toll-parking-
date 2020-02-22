@@ -1,7 +1,5 @@
 package toll.parking.library;
 
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,9 +105,21 @@ public final class ParkingHandler {
     //    double fare = parkHandler.unparkAndReturnFare(car, PricingPolicy.PER_HOUR, 20);
     
     //add 2 hours
-    slot.setOutTime(Instant.now().plus(2, ChronoUnit.HOURS));
+    /*slot.setOutTime(Instant.now().plus(2, ChronoUnit.HOURS));
     double calculateFare = parkHandler.calculateFare(car, PricingPolicy.PER_HOUR, 20, slot);
-    System.out.println(calculateFare);
+    System.out.println(calculateFare);*/
+    
+    Car car2 = new Car(Type.GASOLINE, "vijay", "BLR", 2);
+    parkHandler.parkVehicle(car2);
+    
+    Floor floorForVehicle2 = parkHandler.getFloorForVehicle(car2);
+    ParkingSlot slot2 = floorForVehicle2.getSlot(car2);
+    
+    Car car3 = new Car(Type.ELECTRIC_20KW, "Prachi", "BLR", 2);
+    parkHandler.parkVehicle(car3);
+    
+    Floor floorForVehicle3 = parkHandler.getFloorForVehicle(car3);
+    ParkingSlot slot3 = floorForVehicle3.getSlot(car3);
     
   }
   

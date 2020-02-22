@@ -6,9 +6,8 @@ import java.util.Map;
 
 public class Floor {
   
-  private int                       flrNum;
-  private int                       capacity;
-  //  List<Integer>  avaialbeSpaces;
+  private int                       flrNum = -1;
+  private int                       capacity = -1;
   private BitSet                    freeIndex;
   private BitSet                    occupitedIndex;
   private Map<Vehicle, ParkingSlot> reservedSlotMap;
@@ -19,7 +18,6 @@ public class Floor {
     this.flrNum = flrNum;
     this.capacity = capacity;
     this.type = type;
-    //    avaialbeSpaces = new ArrayList<Integer>(capacity);
     freeIndex = new BitSet();
     occupitedIndex = new BitSet();
     reservedSlotMap = new HashMap<Vehicle, ParkingSlot>();
@@ -124,7 +122,7 @@ public class Floor {
     return flrNum;
   }
   
-  public void setFlorrNumber(int flrNum) {
+  public void setFloorNumber(int flrNum) {
     this.flrNum = flrNum;
   }
   
@@ -152,5 +150,14 @@ public class Floor {
   
   public ParkingSlot getSlot(Vehicle vehicle) {
     return reservedSlotMap.get(vehicle);
+  }
+  
+  public void reinitialiseFloor() {
+    this.flrNum = -1;
+    this.capacity = -1;
+    this.type = null;
+    freeIndex = new BitSet();
+    occupitedIndex = new BitSet();
+    reservedSlotMap = new HashMap<Vehicle, ParkingSlot>();
   }
 }
