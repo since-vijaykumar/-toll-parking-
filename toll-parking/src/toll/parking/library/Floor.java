@@ -8,8 +8,7 @@ public class Floor {
   
   private int                       flrNum = -1;
   private int                       capacity = -1;
-  private BitSet                    freeIndex;
-  private BitSet                    occupitedIndex;
+  private BitSet                    floorPositions;
   private Map<Vehicle, ParkingSlot> reservedSlotMap;
   private Type                      type;
   
@@ -18,8 +17,7 @@ public class Floor {
     this.flrNum = flrNum;
     this.capacity = capacity;
     this.type = type;
-    freeIndex = new BitSet();
-    occupitedIndex = new BitSet();
+    floorPositions = new BitSet();
     reservedSlotMap = new HashMap<Vehicle, ParkingSlot>();
   }
   
@@ -29,14 +27,14 @@ public class Floor {
                                  + type.getTypeName());
     }
     //index available to use
-    int spaceAvaialbeOnFlr = getFreeIndexFromStart();
+    int spaceAvaialbeOnFlr = getFreeSlotIndex();
     // not free space, all are occupied
     if(spaceAvaialbeOnFlr < 0) {
       return false;
     }
     
     //mark floor index as used
-    freeIndex.set(spaceAvaialbeOnFlr);
+    floorPositions.set(spaceAvaialbeOnFlr);
     //assign slot to vehicle
     ParkingSlot parkingSlot = new ParkingSlot(vehicle);
     parkingSlot.setLocation(new Pair<>(flrNum, spaceAvaialbeOnFlr));
@@ -63,13 +61,18 @@ public class Floor {
     parkingSlot.unAssignSlot();
     Pair<Integer, Integer> location = parkingSlot.getLocation();
     //mark floor index as free
-    freeIndex.clear(location.getSecond());
+    floorPositions.clear(location.getSecond());
     return parkingSlot;
   }
   
-  private int getFreeIndexFromStart() {
+  /**
+   * Return next available slot index.
+   * 
+   * @return
+   */
+  public int getFreeSlotIndex() {
     
-    int nextClearBit = freeIndex.nextClearBit(0);
+    int nextClearBit = floorPositions.nextClearBit(0);
     //limit the index's to capacity
     if(nextClearBit >= capacity) {
       return -1;
@@ -77,14 +80,9 @@ public class Floor {
     return nextClearBit;
   }
   
-  public int getBitSetLength(BitSet bitSet) {
-    return bitSet.isEmpty() ? bitSet.length() : bitSet.length() - 1;
+  private int getBitSetLength(BitSet bitSet) {
+    return new Long(bitSet.stream().count()).intValue();
   }
-  
-  /* public boolean isFull()
-  {
-    return avaialbeSpaces.size() >= capacity;
-  }*/
   
   public int getCapacity() {
     return capacity;
@@ -94,28 +92,12 @@ public class Floor {
     this.capacity = capacity;
   }
   
-  /*public List<Integer> getAvaialbeSpaces() {
-    return avaialbeSpaces;
+  public BitSet getFloorPosition() {
+    return floorPositions;
   }
   
-  public void setAvaialbeSpaces(List<Integer> avaialbeSpaces) {
-    this.avaialbeSpaces = avaialbeSpaces;
-  }
-  */
-  public BitSet getFreeIndex() {
-    return freeIndex;
-  }
-  
-  public void setFreeIndex(BitSet freeIndex) {
-    this.freeIndex = freeIndex;
-  }
-  
-  public BitSet getOccupitedIndex() {
-    return occupitedIndex;
-  }
-  
-  public void setOccupitedIndex(BitSet occupitedIndex) {
-    this.occupitedIndex = occupitedIndex;
+  public void setFloorPosition(BitSet freeIndex) {
+    this.floorPositions = freeIndex;
   }
   
   public int getFloorNumber() {
@@ -134,30 +116,37 @@ public class Floor {
     this.type = type;
   }
 
+  public ParkingSlot getSlot(Vehicle vehicle) {
+    return reservedSlotMap.get(vehicle);
+  }
+
+  
+  public void reinitialiseFloor() {
+    this.flrNum = -1;
+    this.capacity = -1;
+    this.type = null;
+    floorPositions = new BitSet();
+    reservedSlotMap = new HashMap<Vehicle, ParkingSlot>();
+  }
+  
+  public int getUsedSlotsCount() {
+    return reservedSlotMap.size();
+  }
+  
   public boolean isFull() {
     //index available to use
-    int spaceAvaialbeOnFlr = getFreeIndexFromStart();
+    int totalOccupiedSlot = getBitSetLength(floorPositions);
     // not free space, all are occupied
-    if(spaceAvaialbeOnFlr < 0) {
+    if(totalOccupiedSlot >= capacity) {
       return true;
     }
     return false;
   }
   
   public boolean isEmpty() {
-    return reservedSlotMap.isEmpty();
+    return getBitSetLength(floorPositions) == 0;
   }
   
-  public ParkingSlot getSlot(Vehicle vehicle) {
-    return reservedSlotMap.get(vehicle);
-  }
+
   
-  public void reinitialiseFloor() {
-    this.flrNum = -1;
-    this.capacity = -1;
-    this.type = null;
-    freeIndex = new BitSet();
-    occupitedIndex = new BitSet();
-    reservedSlotMap = new HashMap<Vehicle, ParkingSlot>();
-  }
 }

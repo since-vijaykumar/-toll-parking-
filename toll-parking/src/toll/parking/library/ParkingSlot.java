@@ -79,5 +79,9 @@ public class ParkingSlot {
     this.location = location;
   }
   
+  public Vehicle getAssingedVehicle() {
+    return assingedVehicle;
+  }
+  
   //no need to override hashCode as we are relaying on object reference.
 }

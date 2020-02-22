@@ -6,17 +6,20 @@ import java.util.List;
 public final class ParkingHandler {
   
   final static private ParkingHandler INSTANCE           = new ParkingHandler();
-  final int                           MAX_SLOT_PER_FLOOR = 10;
-  final List<Floor>                   parkingArea;
+  final static public int             MAX_SLOT_PER_FLOOR = 10;
+  final private List<Floor>           parkingArea;
   
   private ParkingHandler() {
-    Type[] values = Type.values();
     parkingArea = new ArrayList<Floor>();
+    init();
+  }
+  
+  private void init() {
+    Type[] values = Type.values();
     for(Type type : values) {
       parkingArea.add(type.getIndex(), new Floor(type.getIndex(), MAX_SLOT_PER_FLOOR, type));
     }
   }
-  
   
   public static ParkingHandler getInstance() {
     return INSTANCE;
@@ -27,7 +30,6 @@ public final class ParkingHandler {
     Floor floorForVehicle = getFloorForVehicle(vehicle);
     
     if(floorForVehicle.isFull()) {
-      System.out.println("Parking is full for Vehicle Type : " + vehicle.getType().getTypeName());
       return false;
     }
     
@@ -35,12 +37,12 @@ public final class ParkingHandler {
   }
   
   /**
-   * unpark the vehicle and return fare based on uses.
+   * unpark the vehicle.
    * 
    * @param vehicle
    * @return
    */
-  public double unparkAndReturnFare(Vehicle vehicle, PricingPolicy pricePolicy, double rate)
+  public ParkingSlot unparkVehicle(Vehicle vehicle)
   {
     Floor floorForVehicle = getFloorForVehicle(vehicle);
     
@@ -51,9 +53,9 @@ public final class ParkingHandler {
     }
     
     ParkingSlot unassignSlot = floorForVehicle.unassignSlot(vehicle);
-    return calculateFare(vehicle, pricePolicy, rate, unassignSlot);
+    return unassignSlot;
+    //    return calculateFare(vehicle, pricePolicy, rate, unassignSlot);
   }
-
 
   public double calculateFare(Vehicle vehicle, PricingPolicy pricePolicy, double rate,
                                ParkingSlot unassignSlot) {
@@ -75,52 +77,34 @@ public final class ParkingHandler {
         case FIXED_PLUS_PER_HOUR:
           charges = vehicle.getType().getFixedPrice() + ((minuteSpend / 60) * rate);
           break;
+         default:
+          throw new RuntimeException("Invalid Pricing policy + " + pricePolicy);
       }
       return charges;
     }
   }
   
-  private Floor getFloorForVehicle(Vehicle vehicle) {
+  public Floor getFloorForVehicle(Vehicle vehicle) {
     try
     {
-      return parkingArea.get(vehicle.getType().getIndex());
+      return getFloorForType(vehicle.getType());
     }
-    catch(IndexOutOfBoundsException ex)
+    catch(IndexOutOfBoundsException | NullPointerException ex)
     {
       throw new RuntimeException("Unsupported Vehicle type : " + vehicle.getType().getTypeName());
     }
   }
-  
-  public static void main(String[] args) {
-    //0 is for gasoline
-    //1 is for 20kw
-    //2 is for 30kw
-    Car car = new Car(Type.GASOLINE, "vijay", "BLR", 1);
-    ParkingHandler parkHandler = getInstance();
-    parkHandler.parkVehicle(car);
-    
-    Floor floorForVehicle = parkHandler.getFloorForVehicle(car);
-    ParkingSlot slot = floorForVehicle.getSlot(car);
-    
-    //    double fare = parkHandler.unparkAndReturnFare(car, PricingPolicy.PER_HOUR, 20);
-    
-    //add 2 hours
-    /*slot.setOutTime(Instant.now().plus(2, ChronoUnit.HOURS));
-    double calculateFare = parkHandler.calculateFare(car, PricingPolicy.PER_HOUR, 20, slot);
-    System.out.println(calculateFare);*/
-    
-    Car car2 = new Car(Type.GASOLINE, "vijay", "BLR", 2);
-    parkHandler.parkVehicle(car2);
-    
-    Floor floorForVehicle2 = parkHandler.getFloorForVehicle(car2);
-    ParkingSlot slot2 = floorForVehicle2.getSlot(car2);
-    
-    Car car3 = new Car(Type.ELECTRIC_20KW, "Prachi", "BLR", 2);
-    parkHandler.parkVehicle(car3);
-    
-    Floor floorForVehicle3 = parkHandler.getFloorForVehicle(car3);
-    ParkingSlot slot3 = floorForVehicle3.getSlot(car3);
-    
+
+  public Floor getFloorForType(Type type) {
+    return parkingArea.get(type.getIndex());
   }
   
+  public int getTotalNumberOfFloor() {
+    return parkingArea.size();
+  }
+  
+  public void emptyParking() {
+    parkingArea.clear();
+    init();
+  }
 }
