@@ -11,7 +11,7 @@ public interface Vehicle {
   /**
    * return {@link toll.parking.library.Type Type} of Vehicle.
    * 
-   * @return
+   * @return type of vehicle.
    */
   public Type getType();
 }

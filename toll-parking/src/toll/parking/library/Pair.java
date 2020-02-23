@@ -6,7 +6,9 @@ package toll.parking.library;
  * @author ashokv
  *
  * @param <T>
+ *          first element
  * @param <K>
+ *          second element
  */
 public class Pair<T, K> {
   T first;

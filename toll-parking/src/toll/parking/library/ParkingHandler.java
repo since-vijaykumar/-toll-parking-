@@ -128,6 +128,7 @@ public final class ParkingHandler {
    * Return {@link toll.parking.library.Floor Floor} assigned to vehicle.
    * 
    * @param vehicle
+   *          floor vehicle.
    * @throws RuntimeException
    *           in case of Unsupported {@link toll.parking.library.Vehicle Vehicle} type
    * @return floor
@@ -147,7 +148,8 @@ public final class ParkingHandler {
    * Return Floor for {@link toll.parking.library.Type Type}
    * 
    * @param type
-   * @return floor
+   *          floor type
+   * @return floor matching the type.
    */
   public Floor getFloorForType(Type type) {
     return parkingArea.get(type.getIndex());

@@ -36,6 +36,7 @@ public class ParkingSlot {
    * Set {@link toll.parking.library.Type Type} of Parking Slot.
    * 
    * @param type
+   *          of ParkingSlot
    */
   public void setType(Type type) {
     this.type = type;
@@ -53,8 +54,8 @@ public class ParkingSlot {
   /**
    * Set time when the Vehicle assigned to ParkingSlot.
    * 
-   * @param assignedTime
-   *          - time unit as Instance.
+   * @param assingedTime
+   *          time unit as Instance.
    */
   public void setAssingedTime(Instant assingedTime) {
     this.assingedTime = assingedTime;
@@ -72,11 +73,12 @@ public class ParkingSlot {
   /**
    * Set time when the Vehicle unassignedTime from ParkingSlot.
    * 
+   * 
    * @param unassignedTime
-   *          - time unit as Instance.
+   *          time unit as Instance.
    */
-  public void setUnassignedTime(Instant outTime) {
-    this.unassignedTime = outTime;
+  public void setUnassignedTime(Instant unassignedTime) {
+    this.unassignedTime = unassignedTime;
   }
   
   /**

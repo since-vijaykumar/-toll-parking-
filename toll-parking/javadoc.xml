@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" author="true" classpath="build/libs/org.hamcrest.core_1.3.0.v20180420-1519.jar;build/libs/junit.jar" destdir="doc" doctitle="TollParkingLibrary" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" source="1.8" sourcefiles="src/toll/parking/library/Type.java,src/toll/parking/library/Vehicle.java,src/toll/parking/library/PricingPolicy.java,src/toll/parking/library/Floor.java,src/toll/parking/library/Pair.java,src/toll/parking/library/Car.java,src/toll/parking/library/ParkingSlot.java,src/toll/parking/library/ParkingHandler.java" sourcepath="test;src" splitindex="false" use="true" version="true"/>
+    </target>
+</project>
