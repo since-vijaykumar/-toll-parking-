@@ -283,9 +283,9 @@ public class ParkingHandlerTest {
     
     //add 2 hours from current time
     Instant endTime = Instant.now().plus(2, ChronoUnit.HOURS);
-    slot.setOutTime(endTime);
+    slot.setUnassignedTime(endTime);
     
-    long minuteSpend = slot.getInTime().until(endTime, ChronoUnit.MINUTES);
+    long minuteSpend = slot.getAssingedTime().until(endTime, ChronoUnit.MINUTES);
     double totalPrice = Type.ELECTRIC_50KW.getFixedPrice() + ((minuteSpend / 60) * rate);
     
     double fareAfter = parkingHandler.calculateFare(charliCar, fixedPlusPerHour, rate, slot);

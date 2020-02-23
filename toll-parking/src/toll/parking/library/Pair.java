@@ -1,5 +1,13 @@
 package toll.parking.library;
 
+/**
+ * Retain information in Pair.
+ * 
+ * @author ashokv
+ *
+ * @param <T>
+ * @param <K>
+ */
 public class Pair<T, K> {
   T first;
   K second;

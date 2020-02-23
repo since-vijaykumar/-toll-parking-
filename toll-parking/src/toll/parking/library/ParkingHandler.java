@@ -3,6 +3,13 @@ package toll.parking.library;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Singleton ParkingHandler is responsible for handling parking and unparking of vehicle and calculating fare based on
+ * uses.
+ * 
+ * @author ashokv
+ *
+ */
 public final class ParkingHandler {
   
   final static private ParkingHandler INSTANCE           = new ParkingHandler();
@@ -14,6 +21,9 @@ public final class ParkingHandler {
     init();
   }
   
+  /**
+   * Initialize different floors and max capacity of each floor.
+   */
   private void init() {
     Type[] values = Type.values();
     for(Type type : values) {
@@ -21,10 +31,22 @@ public final class ParkingHandler {
     }
   }
   
+  /**
+   * Return instance Parking Handler.
+   * 
+   * @return instance
+   */
   public static ParkingHandler getInstance() {
     return INSTANCE;
   }
   
+  /**
+   * Assign {@link toll.parking.library.Vehicle Vehicle} to {@link toll.parking.library.ParkingSlot ParkingSlot}.
+   * 
+   * @param vehicle
+   *          - Vehicle
+   * @return boolean - true for successful parking else false.
+   */
   public boolean parkVehicle(Vehicle vehicle) {
     
     Floor floorForVehicle = getFloorForVehicle(vehicle);
@@ -37,10 +59,11 @@ public final class ParkingHandler {
   }
   
   /**
-   * unpark the vehicle.
+   * Unassign {@link toll.parking.library.Vehicle Vehicle} from {@link toll.parking.library.ParkingSlot ParkingSlot}.
    * 
    * @param vehicle
-   * @return
+   *          - Vehicle
+   * @return boolean - true for successful unparking else false.
    */
   public ParkingSlot unparkVehicle(Vehicle vehicle)
   {
@@ -54,10 +77,23 @@ public final class ParkingHandler {
     
     ParkingSlot unassignSlot = floorForVehicle.unassignSlot(vehicle);
     return unassignSlot;
-    //    return calculateFare(vehicle, pricePolicy, rate, unassignSlot);
   }
 
-  public double calculateFare(Vehicle vehicle, PricingPolicy pricePolicy, double rate,
+  /**
+   * Calculate fare based on how much time {@link toll.parking.library.Vehicle Vehicle} was assigned to
+   * {@link toll.parking.library.ParkingSlot ParkingSlot} and Charging Rate.
+   * 
+   * @param vehicle
+   *          - {@link toll.parking.library.Vehicle Vehicle}
+   * @param pricePolicy
+   *          - {@link toll.parking.library.PricingPolicy PricingPolicy}
+   * @param charingRate
+   *          - double
+   * @param unassignSlot
+   *          - {@link toll.parking.library.ParkingSlot ParkingSlot}
+   * @return double - price
+   */
+  public double calculateFare(Vehicle vehicle, PricingPolicy pricePolicy, double charingRate,
                                ParkingSlot unassignSlot) {
     double charges = 0;
     //calculate the price 
@@ -72,10 +108,10 @@ public final class ParkingHandler {
       switch(pricePolicy)
       {
         case PER_HOUR:
-          charges = ((double) minuteSpend / 60) * rate;
+          charges = ((double) minuteSpend / 60) * charingRate;
           break;
         case FIXED_PLUS_PER_HOUR:
-          charges = vehicle.getType().getFixedPrice() + ((minuteSpend / 60) * rate);
+          charges = vehicle.getType().getFixedPrice() + ((minuteSpend / 60) * charingRate);
           break;
          default:
           throw new RuntimeException("Invalid Pricing policy + " + pricePolicy);
@@ -84,6 +120,12 @@ public final class ParkingHandler {
     }
   }
   
+  /**
+   * Return {@link toll.parking.library.Floor Floor} assigned to vehicle.
+   * 
+   * @param vehicle
+   * @return floor
+   */
   public Floor getFloorForVehicle(Vehicle vehicle) {
     try
     {
@@ -95,14 +137,28 @@ public final class ParkingHandler {
     }
   }
 
+  /**
+   * Return Floor for {@link toll.parking.library.Type Type}
+   * 
+   * @param type
+   * @return floor
+   */
   public Floor getFloorForType(Type type) {
     return parkingArea.get(type.getIndex());
   }
   
+  /**
+   * Return number of Floors available.
+   * 
+   * @return integer
+   */
   public int getTotalNumberOfFloor() {
     return parkingArea.size();
   }
   
+  /**
+   * Clear all parking and reinitialize again.
+   */
   public void emptyParking() {
     parkingArea.clear();
     init();

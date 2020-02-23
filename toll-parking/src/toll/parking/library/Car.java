@@ -1,6 +1,11 @@
 package toll.parking.library;
 
-
+/**
+ * Car containing information of car type, owner , owner address and car registered number.
+ * 
+ * @author ashokv
+ *
+ */
 public class Car implements Vehicle {
   
   private Type type;
@@ -16,40 +21,85 @@ public class Car implements Vehicle {
     this.address = nullCheck(address);
   }
   
+
   private <T> T nullCheck(T object) {
     //throw null pointer exception if object is null;
     object.getClass();
     return object;
   }
   
+  /**
+   * Return {@link toll.parking.library.Type Type} of car.
+   * 
+   */
   public Type getType() {
     return this.type;
   }
   
+  /**
+   * Set {@link toll.parking.library.Type Type} for car.
+   * 
+   * @param type
+   *          of vehicle
+   * 
+   */
   public void setType(Type type) {
     this.type = type;
   }
   
+  /**
+   * Return car registered number.
+   * 
+   * @return integer value
+   */
   public int getCarNumber() {
     return carNumber;
   }
   
+  /**
+   * Set registered number.
+   * 
+   * @param carNumber
+   *          integer value
+   */
   public void setCarNumber(int carNumber) {
     this.carNumber = carNumber;
   }
   
+  /**
+   * return car owner.
+   * 
+   * @return String
+   */
   public String getOwner() {
     return owner;
   }
   
+  /**
+   * Set car owner.
+   * 
+   * @param owner
+   *          String value
+   */
   public void setOwner(String owner) {
     this.owner = owner;
   }
   
+  /**
+   * Return owner address.
+   * 
+   * @return String
+   */
   public String getAddress() {
     return address;
   }
   
+  /**
+   * Set owner address.
+   * 
+   * @param address
+   *          String
+   */
   public void setAddress(String address) {
     this.address = address;
   }
@@ -92,6 +142,5 @@ public class Car implements Vehicle {
       return false;
     return true;
   }
-  
 
 }
