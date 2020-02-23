@@ -33,6 +33,8 @@ public class Floor {
    * 
    * @param vehicle
    *          -Vehicle need to assign to this slot.
+   * @throws RuntimeException
+   *           if Floor is not compatible with {@link toll.parking.library.Vehicle Vehicle}
    * @return boolean - true if slot is assinged else false.
    */
   public boolean assignSlot(Vehicle vehicle) {
@@ -53,7 +55,6 @@ public class Floor {
     ParkingSlot parkingSlot = new ParkingSlot(vehicle);
     parkingSlot.setLocation(new Pair<>(flrNum, spaceAvaialbeOnFlr));
     reservedSlotMap.put(vehicle, parkingSlot);
-    //      avaialbeSpaces.set(spaceAvaialbeOnFlr, vehicle);
     return true;
   }
   

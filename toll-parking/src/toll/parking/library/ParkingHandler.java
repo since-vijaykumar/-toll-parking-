@@ -63,6 +63,8 @@ public final class ParkingHandler {
    * 
    * @param vehicle
    *          - Vehicle
+   * @throws UnsupportedOperationException
+   *           if {@link toll.parking.library.Floor Floor} is empty.
    * @return boolean - true for successful unparking else false.
    */
   public ParkingSlot unparkVehicle(Vehicle vehicle)
@@ -91,6 +93,8 @@ public final class ParkingHandler {
    *          - double
    * @param unassignSlot
    *          - {@link toll.parking.library.ParkingSlot ParkingSlot}
+   * @throws RuntimeException
+   *           in case of Invalid {@link toll.parking.library.PricingPolicy PricingPolicy}
    * @return double - price
    */
   public double calculateFare(Vehicle vehicle, PricingPolicy pricePolicy, double charingRate,
@@ -124,6 +128,8 @@ public final class ParkingHandler {
    * Return {@link toll.parking.library.Floor Floor} assigned to vehicle.
    * 
    * @param vehicle
+   * @throws RuntimeException
+   *           in case of Unsupported {@link toll.parking.library.Vehicle Vehicle} type
    * @return floor
    */
   public Floor getFloorForVehicle(Vehicle vehicle) {
