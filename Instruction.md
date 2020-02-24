@@ -10,7 +10,7 @@
 All good to go for development.
 
 </BR></BR>
-Checkout
+### Check this out
 ![Checkout](https://github.com/since-vijaykumar/toll-parking/blob/master/toll-parking/gif/Setup.gif)
 
 
@@ -23,8 +23,7 @@ Checkout
 - Select jar file location and provide name for jar -> next ->next-> finish
 
 Done Toll Parking lib is ready for use.
-</BR></BR>
-Checkout
+### Check this out
 ![Checkout](https://github.com/since-vijaykumar/toll-parking/blob/master/toll-parking/gif/CreateLibs.gif)
 
 
