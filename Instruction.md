@@ -9,4 +9,4 @@
 
 All good to go for development.
  
-![Setup](gif/Setup.gif)
+![](gif/Setup.gif)
