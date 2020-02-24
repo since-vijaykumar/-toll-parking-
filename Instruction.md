@@ -10,7 +10,8 @@
 All good to go for development.
 
 </BR></BR>
-![See](https://github.com/since-vijaykumar/toll-parking/blob/master/toll-parking/gif/Setup.gif)
+Checkout
+![Checkout](https://github.com/since-vijaykumar/toll-parking/blob/master/toll-parking/gif/Setup.gif)
 
 
 # How to build libs/jar from Project
@@ -23,6 +24,7 @@ All good to go for development.
 
 Done Toll Parking lib is ready for use.
 </BR></BR>
-![See](https://github.com/since-vijaykumar/toll-parking/blob/master/toll-parking/gif/CreateLibs.gif)
+Checkout
+![Checkout](https://github.com/since-vijaykumar/toll-parking/blob/master/toll-parking/gif/CreateLibs.gif)
 
 
