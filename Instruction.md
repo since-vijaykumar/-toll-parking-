@@ -15,7 +15,7 @@ All good to go for development.
 
 </BR></BR>
 # How to build libs/jar from Project
-- Execute Test cases to make sure our implementation is not breaking behaviour and we are getting expecte results.
+- Execute Test cases to make sure our implementation is not breaking behaviour and we are getting expecte results
 - Go to Test -> toll.parking.library.test 
 - Right click on AllTests.java or ParkingHandler.java -> Run as -> JUnit Test
 - Once all test pass's -> right clikc on toll-parking project folder -> export -> type jar and select jar file
@@ -29,9 +29,15 @@ Done Toll Parking lib is ready for use.
 </BR></BR>
 # How to use Toll Parking lib for your project
 - Create a project is you dont have one already.
-- Create lib folder inside your project root directory ( not necessary ) 
-- Locate  where your libs are present and copy and paste then inside lib for folder.
-- 
+- Create lib folder inside your project root directory ( there are many ways but just for simplification  we are using lib folder )
+- Locate  where your libs are present and copy and paste them inside lib folder
+- Now right click on your project root folder -> property -> java build path -> go to Librarier tab 
+- Click Add Jar -> go to lib folder ( which we created earlier ) and select tollparking jar ->  apply and close
 
+You should be able to use TollParking api's now in your project now.
+
+</BR></BR>
+### Check this out
+![Checkout](https://github.com/since-vijaykumar/toll-parking/blob/master/toll-parking/gif/LibImport.gif)
 
 
