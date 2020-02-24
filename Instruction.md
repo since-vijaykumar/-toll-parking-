@@ -8,5 +8,6 @@
  - Paste copied URI and click next-> provide location -> next -> finish
 
 All good to go for development.
- 
-![](gif/Setup.gif)
+
+</BR></BR>
+![](https://github.com/since-vijaykumar/toll-parking/blob/master/toll-parking/gif/Setup.gif)
