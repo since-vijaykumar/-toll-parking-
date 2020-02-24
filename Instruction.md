@@ -13,7 +13,7 @@ All good to go for development.
 ### Check this out
 ![Checkout](https://github.com/since-vijaykumar/toll-parking/blob/master/toll-parking/gif/Setup.gif)
 
-
+</BR></BR>
 # How to build libs/jar from Project
 - Execute Test cases to make sure our implementation is not breaking behaviour and we are getting expecte results.
 - Go to Test -> toll.parking.library.test 
@@ -25,5 +25,13 @@ All good to go for development.
 Done Toll Parking lib is ready for use.
 ### Check this out
 ![Checkout](https://github.com/since-vijaykumar/toll-parking/blob/master/toll-parking/gif/CreateLibs.gif)
+
+</BR></BR>
+# How to use Toll Parking lib for your project
+- Create a project is you dont have one already.
+- Create lib folder inside your project root directory ( not necessary ) 
+- Locate  where your libs are present and copy and paste then inside lib for folder.
+- 
+
 
 
